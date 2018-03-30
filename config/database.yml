@@ -1,16 +1,22 @@
-development: &defaults
-  adapter: mysql2
-  encoding: utf8
+defaults: &defaults
+  adapter: postgresql
+  encoding: unicode
+  pool: 20
+  username: postgres
+  password: postgres
+  host: localhost
+  port: 5432
+
+development:
   database: git_development
-  username: root
-  password: root
-  pool: 10
-  reconnect: true
+  <<: *defaults
 
 test:
-  <<: *defaults
   database: git_test
+  <<: *defaults
 
 production:
-  <<: *defaults
   database: git_production
+  <<: *defaults
+
+

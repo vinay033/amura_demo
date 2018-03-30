@@ -12,19 +12,22 @@
 
 ActiveRecord::Schema.define(version: 20180329235022) do
 
-  create_table "github_profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "github_profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "username"
     t.string   "email"
     t.string   "name"
     t.string   "image"
     t.string   "access_token"
-    t.text     "user_data",    limit: 65535
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.text     "user_data"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
