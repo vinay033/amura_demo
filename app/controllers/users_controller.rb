@@ -17,8 +17,4 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
     @repositories = Github::get_public_repo @user
   end
-
-  def repository_info
-    @user = User.find params[:id]
-  end
 end

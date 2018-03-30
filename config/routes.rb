@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :get_repositories
-      get :repository_info
     end
   end
 end
