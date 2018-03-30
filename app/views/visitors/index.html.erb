@@ -1,0 +1,66 @@
+<% if user_signed_in? %>
+  <% if current_user.github_user? %>  
+    <div class="container">
+      <div class="span3 well">
+        <center>
+          
+          <% if current_user.github_profile_image.present? %>
+            <img src="<%= current_user.github_profile_image %>" name="aboutme" width="140" height="140" class="img-circle">
+          <% end %>
+          <h4><%= current_user.username %></h4>
+          <h3><%= current_user.full_name %></h3>
+
+          <a href="#aboutModal" data-toggle="modal" data-target="#myModal">
+            <em>click here for more details </em>
+          </a>
+          <p class="text-left"><strong>Public repos: </strong><%= current_user.public_repos %></p>
+          <p class="text-left"><strong>Followers: </strong><%= current_user.total_followers %></p>
+          <p class="text-left"><strong>Following: </strong><%= current_user.total_following %></p>
+          <p class="text-left"><strong>Member since: </strong><%= current_user.member_since %></p>
+          <p><strong>Contributions</strong></p>
+          <script src="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.min.js"></script>
+          <link rel="stylesheet" href="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.css"/>
+          <!-- Prepare a container for your calendar. -->
+          <div class="calendar">
+            <!-- Loading stuff -->
+            Loading the data just for you.
+          </div>
+          <script>
+            new GitHubCalendar(".calendar", "<%= current_user.username %>");
+          </script>
+        </center>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+              <h4 class="modal-title" id="myModalLabel">More About <%= current_user.username %></h4>
+            </div>
+            <div class="modal-body">
+              <center>
+                <% if current_user.github_profile_image.present? %>
+                  <img src="<%= current_user.github_profile_image %>" name="aboutme" width="140" height="140" class="img-circle">
+                <% end %>
+                <h3 class="media-heading"><%= current_user.full_name %> <small><%= current_user.location %></small></h3>
+                
+              </center>
+              <hr>
+              <center>
+                <p class="text-left"><strong>Bio: </strong><br>
+                  <%= current_user.bio.present? ? current_user.bio : "NOT AVAILABLE" %>
+                </p>
+                <br>
+              </center>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

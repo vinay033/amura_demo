@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+  <li><%= link_to 'Edit account', edit_user_registration_path %></li>
+  <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+  <% if current_user.github_user? %>
+    <li><%= link_to 'public repositories', get_repositories_user_path(current_user) %></li>
+  <% end %>
+<% else %>
+  <li><%= link_to 'Sign in github', user_github_omniauth_authorize_path %></li>
+  <li><%= link_to 'Sign in', new_user_session_path %></li>
+  <li><%= link_to 'Sign up', new_user_registration_path %></li>
+<% end %>

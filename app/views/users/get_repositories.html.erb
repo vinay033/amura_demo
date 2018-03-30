@@ -1,0 +1,26 @@
+<br>
+<br>
+<div class="panel-group" id="accordion">
+  <% if @repositories.present? %>
+    <% @repositories.each do |repo| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= repo["id"]%>">
+            <%= repo["name"] %></a>
+          </h4>
+        </div>
+        <div id="collapse-<%= repo["id"]%>" class="panel-collapse collapse">
+          <div class="panel-body">
+            <p class="text-left"><strong>Name: </strong><%= repo["name"] %></p>
+            <p class="text-left"><strong>description: </strong><%= repo["description"].present? ? repo["description"] : "NOT AVAILABLE" %></p>
+            <p class="text-left"><strong>url: </strong><%= repo["url"] %></p>
+            <p class="text-left"><strong>watchers: </strong><%= repo["watchers"] %></p>
+            <p class="text-left"><strong>created_at: </strong><%= repo["created_at"].to_date.strftime("%d %B %Y") %></p>
+            <p class="text-left"><strong>last updated: </strong><%= repo["updated_at"].to_date.strftime("%d %B %Y") %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>  
+  <% end %>
+</div>
